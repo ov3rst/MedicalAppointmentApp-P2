@@ -6,15 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\MedicalAppointment.Domain\MedicalAppointment.Domain.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Exceptions\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Exceptions\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Exceptions\" />
-	  <Folder Include="Interfaces\" />
-	  <Folder Include="Models\" />
-	  <Folder Include="Repositories\" />
+		<ProjectReference Include="..\MedicalAppointment.Domain\MedicalAppointment.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

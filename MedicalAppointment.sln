@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{60771C96-0E26-4CA1-94B7-D14865690BCF}"
 EndProject
@@ -30,6 +30,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointment.Api", "MedicalAppointment.Api\MedicalAppointment.Api.csproj", "{337D86BB-E971-4E87-9029-027E5F1165FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointment.Web", "MedicalAppointment.Web\MedicalAppointment.Web.csproj", "{1EE0B6A2-D3DF-4279-A0BF-64208A280446}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOC", "IOC", "{5C8C04F0-4E24-4EEB-B029-E1CCF285B627}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAppointment.IOC", "MedicalAppointment.IOC\MedicalAppointment.IOC.csproj", "{0EB188FB-4A91-4F3B-B398-EB581E1D515B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{1EE0B6A2-D3DF-4279-A0BF-64208A280446}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EE0B6A2-D3DF-4279-A0BF-64208A280446}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EE0B6A2-D3DF-4279-A0BF-64208A280446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EB188FB-4A91-4F3B-B398-EB581E1D515B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB188FB-4A91-4F3B-B398-EB581E1D515B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB188FB-4A91-4F3B-B398-EB581E1D515B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB188FB-4A91-4F3B-B398-EB581E1D515B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +90,6 @@ Global
 		{25FC4AE8-93AE-42FC-B548-BCF6BA5A7FE1} = {0C354DE5-7D6A-453C-A1C9-A9C49660B695}
 		{337D86BB-E971-4E87-9029-027E5F1165FC} = {D94642AB-F4F4-4501-B22D-BB71F4CCEBEC}
 		{1EE0B6A2-D3DF-4279-A0BF-64208A280446} = {B0E9A62B-D796-4A58-8A37-036BE3681170}
+		{0EB188FB-4A91-4F3B-B398-EB581E1D515B} = {5C8C04F0-4E24-4EEB-B029-E1CCF285B627}
 	EndGlobalSection
 EndGlobal
