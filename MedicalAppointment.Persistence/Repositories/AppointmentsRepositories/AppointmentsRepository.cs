@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Domain.Entities.Appointments;
+using MedicalAppointment.Persistence.Base;
+using MedicalAppointment.Persistence.Context;
 
 namespace MedicalAppointment.Persistence.Repositories.AppointmentsRepositories
 {
-    internal class AppointmentsRepository
+    public class AppointmentsRepository : BaseRepository<Appointments, int>
     {
+        private readonly AppointmentDbContext _context;
+
+        public AppointmentsRepository(AppointmentDbContext context) : base(context)
+        {
+            _context = context;
+        }
     }
 }

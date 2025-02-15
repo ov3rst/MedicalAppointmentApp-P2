@@ -1,7 +1,7 @@
 ﻿using MedicalAppointment.Domain.Entities.System;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalAppointment.Persistence.Context.SystemEntities
+namespace MedicalAppointment.Persistence.Context
 {
     public partial class AppointmentDbContext
     {

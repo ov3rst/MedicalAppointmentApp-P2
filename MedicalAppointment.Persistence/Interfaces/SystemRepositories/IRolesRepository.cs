@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Domain.Entities.System;
+using MedicalAppointment.Domain.Repository;
 
 namespace MedicalAppointment.Persistence.Interfaces.SystemRepositories
 {
-    internal interface IRolesRepository
+    public interface IRolesRepository : IBaseRepository<Roles, int>
     {
     }
 }

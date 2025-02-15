@@ -3,7 +3,7 @@ using MedicalAppointment.Domain.Repository;
 
 namespace MedicalAppointment.Persistence.Interfaces.UsersRepositories
 {
-    internal interface IUserRepository : IBaseRepository<Users, int>
+    public interface IUserRepository : IBaseRepository<User, int>
     {
     }
 }

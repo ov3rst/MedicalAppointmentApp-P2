@@ -1,12 +1,12 @@
 ﻿using MedicalAppointment.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedicalAppointment.Persistence.Context.UsersEntities
+namespace MedicalAppointment.Persistence.Context
 {
-    public partial class AppointmentDbContext
+    public partial class AppointmentDbContext : DbContext
     {
-        public DbSet<Doctors> Doctors { get; set; }
-        public DbSet<Patients> Patients { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

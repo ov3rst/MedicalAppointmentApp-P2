@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Domain.Entities.Insurance;
+using MedicalAppointment.Persistence.Base;
+using MedicalAppointment.Persistence.Context;
 
 namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
 {
-    internal class NetworkTypeRepository
+    public class NetworkTypeRepository : BaseRepository<NetworkType, int>
     {
+        private readonly AppointmentDbContext _context;
+
+        public NetworkTypeRepository(AppointmentDbContext context) : base(context)
+        {
+            _context = context;
+        }
     }
 }

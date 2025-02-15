@@ -9,6 +9,6 @@ namespace MedicalAppointment.Domain.Entities.Medical
         [Key]
         [Column("SAvailabilityModeID")]
         public override short Id { get; set; }
-        public string AvailabilityMode { get; set; }
+        public string? AvailabilityMode { get; set; }
     }
 }

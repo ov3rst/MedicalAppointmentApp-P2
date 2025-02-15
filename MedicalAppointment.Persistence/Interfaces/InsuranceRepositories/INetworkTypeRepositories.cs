@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Domain.Entities.Insurance;
+using MedicalAppointment.Domain.Repository;
 
 namespace MedicalAppointment.Persistence.Interfaces.InsuranceRepositories
 {
-    internal interface INetworkTypeRepositories
+    public interface INetworkTypeRepositories : IBaseRepository<NetworkType, int>
     {
     }
 }
