@@ -17,7 +17,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MedicalAppointment.Domain\MedicalAppointment.Domain.csproj" />
-		<ProjectReference Include="..\MedicalAppointment.Model\MedicalAppointment.Model.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
