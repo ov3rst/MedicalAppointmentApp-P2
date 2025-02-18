@@ -20,13 +20,30 @@ namespace MedicalAppointment.Persistence.Base
 
         public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter) => await Entity.AnyAsync(filter);
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await Entity.ToListAsync();
+        public virtual async Task<OperationResult> GetAllAsync()
+        {
+            OperationResult result = new OperationResult();
+
+            try
+            {
+                result.Data = await Entity.ToListAsync();
+                result.Message = "Entidades encontradas";
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = "Hubo un error al listar las entidades";
+            }
+
+            return result;
+        }
         public virtual async Task<OperationResult> GetAllAsync(Expression<Func<TEntity, bool>> filter)
         {
             OperationResult result = new();
             try
             {
                 result.Data = await this.Entity.Where(filter).ToListAsync();
+                result.Message = "Entidades encontradas";
             }
             catch (Exception ex)
             {
@@ -37,7 +54,21 @@ namespace MedicalAppointment.Persistence.Base
             return result;
         }
 
-        public virtual async Task<TEntity> GetEntityByIdAsync(TType id) => await Entity.FindAsync(id);
+        public virtual async Task<OperationResult> GetEntityByIdAsync(TType id)
+        {
+            OperationResult result = new OperationResult();
+            try
+            {
+                result.Data = await Entity.FindAsync(id);
+                result.Message = "Se ha encotrado la entidad";
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = "Ocurrio un error al encontrar la entidad -> " + ex.Message;
+            }
+            return result;
+        }
 
         public virtual async Task<OperationResult> SaveEntityAsync(TEntity entity)
         {
@@ -46,6 +77,7 @@ namespace MedicalAppointment.Persistence.Base
             {
                 await this.Entity.AddAsync(entity);
                 await _appointmentDbContext.SaveChangesAsync();
+                result.Message = "Entidad guardada correctamente";
             }
             catch (Exception ex)
             {
@@ -63,6 +95,7 @@ namespace MedicalAppointment.Persistence.Base
             {
                 this.Entity.Update(entity);
                 await _appointmentDbContext.SaveChangesAsync();
+                result.Message = "Entidad actualizada correctamente";
             }
             catch (Exception ex)
             {
@@ -70,6 +103,24 @@ namespace MedicalAppointment.Persistence.Base
                 result.Message = $"Ocurrió el error {ex.Message} obteniendo los datos.";
             }
 
+            return result;
+        }
+
+        public virtual async Task<OperationResult> RemoveEntityAsync(TEntity entity)
+        {
+            OperationResult result = new();
+
+            try
+            {
+                _appointmentDbContext.Update(entity);
+                await _appointmentDbContext.SaveChangesAsync();
+                result.Message = "Entidad removida correctamente";
+            }
+            catch (Exception)
+            {
+                result.Success = false;
+                result.Message = "Ocurrio un error eliminando la entidad";
+            }
             return result;
         }
     }

@@ -10,10 +10,11 @@ namespace MedicalAppointment.Domain.Repository
     /// <typeparam name="TType">El tipo de dato del primary key para realizarla consulta.</typeparam>
     public interface IBaseRepository<TEntity, TType> where TEntity : class
     {
-        Task<TEntity> GetEntityByIdAsync(TType id);
+        Task<OperationResult> GetEntityByIdAsync(TType id);
         Task<OperationResult> UpdateEntityAsync(TEntity entity);
         Task<OperationResult> SaveEntityAsync(TEntity entity);
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<OperationResult> RemoveEntityAsync(TEntity entity);
+        Task<OperationResult> GetAllAsync();
         Task<OperationResult> GetAllAsync(Expression<Func<TEntity, bool>> filter);
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter);
     }
