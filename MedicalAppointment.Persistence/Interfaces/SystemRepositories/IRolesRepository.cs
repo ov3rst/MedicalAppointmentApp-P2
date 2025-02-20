@@ -5,5 +5,6 @@ namespace MedicalAppointment.Persistence.Interfaces.SystemRepositories
 {
     public interface IRolesRepository : IBaseRepository<Roles, int>
     {
+
     }
 }

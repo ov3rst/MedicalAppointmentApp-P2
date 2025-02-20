@@ -32,7 +32,7 @@ namespace MedicalAppointment.Persistence.Base
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = "Hubo un error al listar las entidades";
+                result.Message = $"Hubo el error ->{ex.Message}, al listar las entidades";
             }
 
             return result;
@@ -48,7 +48,7 @@ namespace MedicalAppointment.Persistence.Base
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = $"Ocurrió el error {ex.Message} obteniendo los datos.";
+                result.Message = $"Ocurrió el error {ex.Message}, obteniendo los datos.";
             }
 
             return result;
@@ -65,7 +65,7 @@ namespace MedicalAppointment.Persistence.Base
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = "Ocurrio un error al encontrar la entidad -> " + ex.Message;
+                result.Message = $"Ocurrio el error ->{ex.Message} al encontrar la entidad -> ";
             }
             return result;
         }
@@ -116,10 +116,10 @@ namespace MedicalAppointment.Persistence.Base
                 await _appointmentDbContext.SaveChangesAsync();
                 result.Message = "Entidad removida correctamente";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = "Ocurrio un error eliminando la entidad";
+                result.Message = $"Ocurrio el error {ex.Message} eliminando la entidad";
             }
             return result;
         }

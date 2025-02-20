@@ -3,7 +3,7 @@ using MedicalAppointment.Domain.Repository;
 
 namespace MedicalAppointment.Persistence.Interfaces.InsuranceRepositories
 {
-    public interface IInsuranceProviderRepositories : IBaseRepository<InsuranceProvider, int>
+    public interface INetworkTypeRepository : IBaseRepository<NetworkType, int>
     {
     }
 }

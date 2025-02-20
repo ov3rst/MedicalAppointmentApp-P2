@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
 {
-    public class InsuranceProviderRepository : BaseRepository<InsuranceProvider, int>, IInsuranceProviderRepositories
+    public class InsuranceProviderRepository : BaseRepository<InsuranceProvider, int>, IInsuranceProviderRepository
     {
         private readonly AppointmentDbContext _context;
         private readonly ILogger<AppointmentsRepository> _logger;
@@ -57,9 +57,9 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
                                              NetworkName = network.Name,
                                              NetworkDescription = network.Description,
 
-                                         }).FirstOrDefaultAsync();
+                                         }).ToListAsync();
 
-                    result.Message = "La entidad ha sido encontrada";
+                    result.Message = "Las entidades han sido encontradas";
                 }
                 catch (Exception ex)
                 {

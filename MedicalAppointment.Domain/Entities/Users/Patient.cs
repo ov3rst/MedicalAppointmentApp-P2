@@ -17,6 +17,6 @@ namespace MedicalAppointment.Domain.Entities.Users
         public string EmergencyContactPhone { get; set; }
         public string BloodType { get; set; }
         public string Allergies { get; set; }
-        public int InsuranceProvider { get; set; }
+        public int InsuranceProviderId { get; set; }
     }
 }

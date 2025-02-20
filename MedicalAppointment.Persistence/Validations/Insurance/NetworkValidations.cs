@@ -3,9 +3,9 @@ using MedicalAppointment.Domain.Entities.Insurance;
 
 namespace MedicalAppointment.Persistence.Validations.Insurance
 {
-    public class InsuranceValitation
+    public class NetworkValidations
     {
-        public static OperationResult ValidateInsurance(InsuranceProvider entity, bool validateID = false)
+        public static OperationResult ValidateNetwork(NetworkType entity, bool validateID = false)
         {
             OperationResult result = BaseValidations.ValidateEntity(entity);
             if (!result.Success) return result;
@@ -19,13 +19,7 @@ namespace MedicalAppointment.Persistence.Validations.Insurance
             result = BaseValidations.ValidateString(entity.Name);
             if (!result.Success) return result;
 
-            result = BaseValidations.ValidatePhone(entity.ContactNumber);
-            if (!result.Success) return result;
-
-            result = BaseValidations.ValidateEmail(entity.Email);
-            if (!result.Success) return result;
-
-            result = BaseValidations.ValidateId(entity.NetworkTypeId, "NetworkTypeId");
+            result = BaseValidations.ValidateString(entity.Description!);
             if (!result.Success) return result;
 
             return result;

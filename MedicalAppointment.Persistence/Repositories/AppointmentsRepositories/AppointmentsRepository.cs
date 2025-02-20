@@ -29,41 +29,6 @@ namespace MedicalAppointment.Persistence.Repositories.AppointmentsRepositories
         {
             OperationResult result = AppointmentValidations.ValidateAppointment(entity);
 
-            //if (entity is null)
-            //{
-            //    result.Success = false;
-            //    result.Message = "La entidad no puede ser nula";
-            //    return result;
-            //}
-
-            //if (entity!.DoctorID <= 0)
-            //{
-            //    result.Success = false;
-            //    result.Message = "El doctor no debe ser nulo";
-            //    return result;
-            //}
-
-            //if (entity.PatientID <= 0)
-            //{
-            //    result.Success = false;
-            //    result.Message = "El paciente no debe ser nulo";
-            //    return result;
-            //}
-
-            //if (entity.AppointmentDate <= DateTime.Now)
-            //{
-            //    result.Success = false;
-            //    result.Message = $"La fecha de la cita es invalida";
-            //    return result;
-            //}
-
-            if (await base.ExistsAsync(e => e.Id == entity.Id))
-            {
-                result.Success = false;
-                result.Message = "La entidad ya existe en la base de datos";
-                return result;
-            }
-
             if (result.Success)
             {
                 try
