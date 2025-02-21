@@ -45,6 +45,8 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                                          RoleID = role.Id,
                                          RoleName = role.RoleName
                                      }).ToListAsync();
+
+                result.Message = "Usuarios encontrados";
             }
             catch (Exception ex)
             {
@@ -74,6 +76,10 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                                          RoleID = role.Id,
                                          RoleName = role.RoleName
                                      }).FirstOrDefaultAsync();
+
+                if (result.Data is null) throw new Exception();
+
+                result.Message = "Usuario encontrado";
             }
             catch (Exception ex)
             {

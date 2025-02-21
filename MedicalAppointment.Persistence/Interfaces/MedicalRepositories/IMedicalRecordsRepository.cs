@@ -6,6 +6,6 @@ namespace MedicalAppointment.Persistence.Interfaces.MedicalRepositories
 {
     public interface IMedicalRecordsRepository : IBaseRepository<MedicalRecords, int>
     {
-        Task<OperationResult> GetMedicalRecordsByPacientId(int pacientId);
+        Task<OperationResult> GetMedicalRecordsByPacientId(int patientId);
     }
 }

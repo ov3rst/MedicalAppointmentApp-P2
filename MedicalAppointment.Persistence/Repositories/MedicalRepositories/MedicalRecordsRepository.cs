@@ -28,16 +28,16 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
             _configuration = configuration;
         }
 
-        public async Task<OperationResult> GetMedicalRecordsByPacientId(int pacientId)
+        public async Task<OperationResult> GetMedicalRecordsByPacientId(int patientId)
         {
-            OperationResult result = BaseValidations.ValidateId(pacientId);
+            OperationResult result = BaseValidations.ValidateId(patientId);
 
             if (result.Success)
             {
                 try
                 {
                     result.Data = await (from record in _context.MedicalRecords
-                                         where record.Id == pacientId
+                                         where record.Id == patientId
                                          select new GetRecordModel
                                          {
                                              RecordId = record.Id,
