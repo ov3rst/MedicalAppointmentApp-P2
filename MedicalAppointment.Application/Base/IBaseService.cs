@@ -1,6 +1,6 @@
 ﻿using MedicalAppointment.Domain.Base;
 
-namespace MedicalAppointment.Application.Contracts_Interfaces_
+namespace MedicalAppointment.Application.Base
 {
     public interface IBaseService<TDtoSave, TDtoUpdate, TDtoRemove, TType>
     {
@@ -9,6 +9,5 @@ namespace MedicalAppointment.Application.Contracts_Interfaces_
         Task<OperationResult> Save(TDtoSave data);
         Task<OperationResult> Update(TDtoUpdate data);
         Task<OperationResult> Remove(TDtoRemove data);
-
     }
 }

@@ -2,6 +2,6 @@
 {
     public record UpdateAppointmentDTO : BaseAppointmentDTO
     {
-
+        public int AppointmentId { get; set; }
     }
 }

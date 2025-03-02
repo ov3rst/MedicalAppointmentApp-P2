@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Application.Base;
+using MedicalAppointment.Application.DTOs.SystemDTOs.Notification;
 
 namespace MedicalAppointment.Application.Contracts_Interfaces_.System
 {
-    internal interface INotificationService
+    public interface INotificationService : IBaseService<SaveNotificationDTO, UpdateNotificationDTO, RemoveNotificationDTO, int>
     {
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Application.Base;
+using MedicalAppointment.Application.DTOs.MedicalDTOs.AvailabilityModes;
 
 namespace MedicalAppointment.Application.Contracts_Interfaces_.Medical
 {
-    internal interface IAvailavilityModesService
+    public interface IAvailavilityModesService : IBaseService<SaveAvailabilityModesDTO, UpdateAvailabilityModesDTO, RemoveAvailabilityModesDTO, short>
     {
     }
 }

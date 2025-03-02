@@ -2,7 +2,7 @@
 
 namespace MedicalAppointment.Application.DTOs.InsuranceDTOs.InsuranceProvider
 {
-    public abstract record BaseInsuranceProviderDTO : BaseDTO
+    public abstract record BaseInsuranceProviderDTO : BaseActiveDTO
     {
         public string Name { get; set; }
         public string ContactNumber { get; set; }

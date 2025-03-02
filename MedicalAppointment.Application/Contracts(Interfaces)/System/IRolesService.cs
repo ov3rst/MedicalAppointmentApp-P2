@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Application.Base;
+using MedicalAppointment.Application.DTOs.SystemDTOs.Roles;
 
 namespace MedicalAppointment.Application.Contracts_Interfaces_.System
 {
-    internal interface IRolesService
+    public interface IRolesService : IBaseService<SaveRolesDTO, UpdateRolesDTO, RemoveRolesDTO, int>
     {
     }
 }

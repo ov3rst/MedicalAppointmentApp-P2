@@ -11,12 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
-    <Folder Include="DTOs\InsuranceDTOs\NetwrokTypes\" />
-    <Folder Include="DTOs\MedicalDTOs\" />
-    <Folder Include="DTOs\UsersDTOs\" />
-    <Folder Include="DTOs\SystemDTOs\" />
-    <Folder Include="Services\" />
+    <Folder Include="Services\AppointmentsServices\" />
+    <Folder Include="Services\InsuranceServices\" />
+    <Folder Include="Services\MedicalServices\" />
+    <Folder Include="Services\UsersServices\" />
+    <Folder Include="Services\SystemServices\" />
   </ItemGroup>
 
 </Project>

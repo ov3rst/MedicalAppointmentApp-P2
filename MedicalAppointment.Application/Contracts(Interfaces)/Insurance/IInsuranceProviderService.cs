@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Application.Base;
+using MedicalAppointment.Application.DTOs.InsuranceDTOs.InsuranceProvider;
 
 namespace MedicalAppointment.Application.Contracts_Interfaces_.Insurance
 {
-    internal interface IInsuranceProviderService
+    public interface IInsuranceProviderService : IBaseService<SaveInsuranceProviderDTO, UpdateInsuranceProviderDTO, RemoveInsuranceProviderDTO, int>
     {
     }
 }

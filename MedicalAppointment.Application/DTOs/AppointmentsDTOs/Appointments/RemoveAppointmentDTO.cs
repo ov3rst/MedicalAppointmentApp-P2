@@ -2,5 +2,6 @@
 {
     public record RemoveAppointmentDTO
     {
+        public int AppointmentId { get; set; }
     }
 }

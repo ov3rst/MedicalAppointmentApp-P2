@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalAppointment.Application.Base;
+using MedicalAppointment.Application.DTOs.MedicalDTOs.Specialties;
 
 namespace MedicalAppointment.Application.Contracts_Interfaces_.Medical
 {
-    internal interface ISpecialtiesService
+    public interface ISpecialtiesService : IBaseService<SaveSpecialtiesDTO, UpdateSpecialtiesDTO, RemoveSpecialtiesDTO, short>
     {
     }
 }
