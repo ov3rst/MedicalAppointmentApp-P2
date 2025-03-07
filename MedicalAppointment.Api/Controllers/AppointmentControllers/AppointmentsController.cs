@@ -1,19 +1,21 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.Appointments;
-using MedicalAppointment.Persistence.Interfaces.AppointmentsRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.Appointments;
+using MedicalAppointment.Application.DTOs.AppointmentsDTOs.Appointments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.AppointmentControllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
-    public class AppointmentsController : BaseController<Appointments, int>
+    public class AppointmentsController : BaseController<SaveAppointmentDTO, UpdateAppointmentDTO, RemoveAppointmentDTO, int>
     {
-        private readonly IAppointmentsRepository _repository;
+        private readonly IAppointmentService _service;
 
-        public AppointmentsController(IAppointmentsRepository repository) : base(repository)
+        public AppointmentsController(IAppointmentService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
     }
 }

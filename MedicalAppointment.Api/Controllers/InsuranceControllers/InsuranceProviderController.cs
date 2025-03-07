@@ -1,19 +1,19 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.Insurance;
-using MedicalAppointment.Persistence.Interfaces.InsuranceRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.Insurance;
+using MedicalAppointment.Application.DTOs.InsuranceDTOs.InsuranceProvider;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.InsuranceControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InsuranceProviderController : BaseController<InsuranceProvider, int>
+    public class InsuranceProviderController : BaseController<SaveInsuranceProviderDTO, UpdateInsuranceProviderDTO, RemoveInsuranceProviderDTO, int>
     {
-        private readonly IInsuranceProviderRepository _repository;
+        private readonly IInsuranceProviderService _service;
 
-        public InsuranceProviderController(IInsuranceProviderRepository repository) : base(repository)
+        public InsuranceProviderController(IInsuranceProviderService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
     }
 }

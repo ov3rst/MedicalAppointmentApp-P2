@@ -7,6 +7,7 @@ namespace MedicalAppointment.Domain.Entities.Users
     public sealed class Doctor : Base.ActiveEntity<int>
     {
         [Key]
+        [ForeignKey("User")]
         [Column("DoctorID")]
         public override int Id { get; set; }
 
@@ -21,7 +22,7 @@ namespace MedicalAppointment.Domain.Entities.Users
         public string? ClinicAddress { get; set; }
 
         [ForeignKey("AvailabilityModeId")]
-        public short AvailabilityModeId { get; set; }
+        public short? AvailabilityModeId { get; set; }
         public DateOnly LicenseExpirationDate { get; set; }
     }
 }

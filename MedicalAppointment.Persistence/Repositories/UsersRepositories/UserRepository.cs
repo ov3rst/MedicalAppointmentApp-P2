@@ -134,15 +134,15 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
         }
 
         // Este metodo hay que hacerle un arreglo, si se borra un usuario hay que ver si es doctor o paciente, y desactivar esos datos tambien
-        public async override Task<OperationResult> RemoveEntityAsync(User entity)
+        public async override Task<OperationResult> RemoveEntityAsync(int id)
         {
-            OperationResult result = UsersValidations.ValidateUser(entity);
+            OperationResult result = BaseValidations.ValidateId(id);
 
             if (result.Success)
             {
                 try
                 {
-                    result = await base.RemoveEntityAsync(entity);
+                    result = await base.RemoveEntityAsync(id);
                 }
                 catch (Exception ex)
                 {

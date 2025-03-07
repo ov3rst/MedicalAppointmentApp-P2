@@ -2,6 +2,6 @@
 {
     public record RemoveAvailabilityModesDTO
     {
-        public int AvailabilityId { get; set; }
+        public short AvailabilityId { get; set; }
     }
 }

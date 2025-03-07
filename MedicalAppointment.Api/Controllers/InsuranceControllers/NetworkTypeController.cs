@@ -1,19 +1,19 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.Insurance;
-using MedicalAppointment.Persistence.Interfaces.InsuranceRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.Insurance;
+using MedicalAppointment.Application.DTOs.InsuranceDTOs.NetwrokTypes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.InsuranceControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NetworkTypeController : BaseController<NetworkType, int>
+    public class NetworkTypeController : BaseController<SaveNetworkTypeDTO, UpdateNetworkTypeDTO, RemoveNetworkTypeDTO, int>
     {
-        private readonly INetworkTypeRepository _repository;
+        private readonly INetworkTypeService _service;
 
-        public NetworkTypeController(INetworkTypeRepository repository) : base(repository)
+        public NetworkTypeController(INetworkTypeService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
     }
 }

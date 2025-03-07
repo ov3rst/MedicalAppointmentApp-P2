@@ -17,11 +17,12 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
-        public static OperationResult ValidateString(string str)
+        public static OperationResult ValidateString(string str, int length)
         {
-            OperationResult result = new();
+            if (string.IsNullOrEmpty(str)) return new OperationResult();
+            OperationResult result = ValidateLength(str, length);
 
-            if (Regex.IsMatch(str, @"[\d]"))
+            if (result.Success && Regex.IsMatch(str, @"[\d]"))
             {
                 result.Success = false;
                 result.Message = "Esta propiedad no debe contener numeros";
@@ -82,7 +83,7 @@ namespace MedicalAppointment.Persistence.Validations
 
         public static OperationResult ValidateDate(DateTime date)
         {
-            OperationResult result = new OperationResult();
+            OperationResult result = new();
 
             if (date <= DateTime.Now)
             {
@@ -91,6 +92,45 @@ namespace MedicalAppointment.Persistence.Validations
             }
 
             return result;
+        }
+
+        public static OperationResult ValidateTime(TimeOnly time)
+        {
+            OperationResult result = new();
+
+            if (time <= TimeOnly.FromDateTime(DateTime.Now))
+            {
+                result.Success = false;
+                result.Message = "La hora ingresada es invalida";
+            }
+
+            return result;
+        }
+
+        public static DateTime ToDateTime(DateOnly dateOnly) => new DateTime(dateOnly.Year, dateOnly.Month, dateOnly.Day);
+
+        public static OperationResult ValidateLength(string str, int length)
+        {
+            OperationResult result = new();
+            if (str.Length > length)
+            {
+                result.Success = false;
+                result.Message = "El limite de caracteres es mayor al permitido";
+            }
+
+            return result;
+        }
+
+        private static bool IsNullable(object prop, string propName)
+        {
+            Type type = prop.GetType().;
+
+            if (type.IsValueType)
+            {
+                //bool isNullable = Nullable.GetUnderlyingType(type.PropertyType) != null;
+            }
+
+            return false;
         }
     }
 }

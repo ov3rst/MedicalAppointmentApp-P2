@@ -1,19 +1,19 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.System;
-using MedicalAppointment.Persistence.Interfaces.SystemRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.System;
+using MedicalAppointment.Application.DTOs.SystemDTOs.Roles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.SystemControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : BaseController<Roles, int>
+    public class RolesController : BaseController<SaveRolesDTO, UpdateRolesDTO, RemoveRolesDTO, int>
     {
-        private readonly IRolesRepository _rolesRepository;
+        private readonly IRolesService _service;
 
-        public RolesController(IRolesRepository rolesRepository) : base(rolesRepository)
+        public RolesController(IRolesService service) : base(service)
         {
-            _rolesRepository = rolesRepository;
+            _service = service;
         }
     }
 }

@@ -5,6 +5,7 @@ using MedicalAppointment.Persistence.Base;
 using MedicalAppointment.Persistence.Context;
 using MedicalAppointment.Persistence.Interfaces.MedicalRepositories;
 using MedicalAppointment.Persistence.Repositories.AppointmentsRepositories;
+using MedicalAppointment.Persistence.Validations;
 using MedicalAppointment.Persistence.Validations.Medical;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -98,15 +99,15 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
             return result;
         }
 
-        public async override Task<OperationResult> RemoveEntityAsync(Specialties entity)
+        public async override Task<OperationResult> RemoveEntityAsync(short id)
         {
-            OperationResult result = SpecialtiesValidations.ValidateSpecialties(entity, true);
+            OperationResult result = BaseValidations.ValidateId(id);
 
             if (result.Success)
             {
                 try
                 {
-                    result = await base.RemoveEntityAsync(entity);
+                    result = await base.RemoveEntityAsync(id);
                 }
                 catch (Exception ex)
                 {

@@ -1,19 +1,19 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.Appointments;
-using MedicalAppointment.Persistence.Interfaces.AppointmentsRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.Appointments;
+using MedicalAppointment.Application.DTOs.AppointmentsDTOs.DoctorAvailability;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.AppointmentControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DoctorAvailabilityController : BaseController<DoctorAvailability, int>
+    public class DoctorAvailabilityController : BaseController<SaveDoctorAvailabilityDTO, UpdateDoctorAvailabilityDTO, RemoveDoctorAvailabilityDTO, int>
     {
-        private readonly IDoctorAvailabilityRepository _repository;
+        private readonly IDoctorAvailabilityService _service;
 
-        public DoctorAvailabilityController(IDoctorAvailabilityRepository repository) : base(repository)
+        public DoctorAvailabilityController(IDoctorAvailabilityService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MedicalAppointment.Domain.Repository
         Task<OperationResult> GetEntityByIdAsync(TType id);
         Task<OperationResult> UpdateEntityAsync(TEntity entity);
         Task<OperationResult> SaveEntityAsync(TEntity entity);
-        Task<OperationResult> RemoveEntityAsync(TEntity entity);
+        Task<OperationResult> RemoveEntityAsync(TType id);
         Task<OperationResult> GetAllAsync();
         Task<OperationResult> GetAllAsync(Expression<Func<TEntity, bool>> filter);
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter);

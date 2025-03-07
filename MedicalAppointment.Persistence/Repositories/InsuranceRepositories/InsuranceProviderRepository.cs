@@ -159,15 +159,15 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
             return result;
         }
 
-        public async override Task<OperationResult> RemoveEntityAsync(InsuranceProvider entity)
+        public async override Task<OperationResult> RemoveEntityAsync(int id)
         {
-            OperationResult result = InsuranceValitation.ValidateInsurance(entity, true);
+            OperationResult result = BaseValidations.ValidateId(id);
 
             if (result.Success)
             {
                 try
                 {
-                    result = await base.RemoveEntityAsync(entity);
+                    result = await base.RemoveEntityAsync(id);
                 }
                 catch (Exception ex)
                 {

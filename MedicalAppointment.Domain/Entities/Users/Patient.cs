@@ -7,6 +7,7 @@ namespace MedicalAppointment.Domain.Entities.Users
     public sealed class Patient : Base.ActiveEntity<int>
     {
         [Key]
+        [ForeignKey("User")]
         [Column("PatientID")]
         public override int Id { get; set; }
         public DateOnly DateOfBirth { get; set; }

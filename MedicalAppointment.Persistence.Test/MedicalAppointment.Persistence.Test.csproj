@@ -20,4 +20,12 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AppointmentTests\" />
+    <Folder Include="InsuranceTests\" />
+    <Folder Include="MedicalTests\" />
+    <Folder Include="UsersTests\" />
+    <Folder Include="SystemTests\" />
+  </ItemGroup>
+
 </Project>

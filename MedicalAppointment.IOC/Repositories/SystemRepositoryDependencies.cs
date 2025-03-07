@@ -6,7 +6,7 @@ namespace MedicalAppointment.IOC.Repositories
 {
     public static class SystemRepositoryDependencies
     {
-        public static void AddSystemDependencies(IServiceCollection services)
+        public static void AddSystemRepositories(IServiceCollection services)
         {
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IRolesRepository, RolesRepository>();

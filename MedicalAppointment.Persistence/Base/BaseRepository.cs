@@ -3,6 +3,7 @@ using MedicalAppointment.Domain.Repository;
 using MedicalAppointment.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace MedicalAppointment.Persistence.Base
 {
@@ -106,13 +107,29 @@ namespace MedicalAppointment.Persistence.Base
             return result;
         }
 
-        public virtual async Task<OperationResult> RemoveEntityAsync(TEntity entity)
+        public virtual async Task<OperationResult> RemoveEntityAsync(TType id)
         {
             OperationResult result = new();
 
             try
             {
-                _appointmentDbContext.Update(entity);
+                var entity = await Entity.FindAsync(id);
+
+                Type type = entity!.GetType();
+                PropertyInfo activeInfo = type.GetProperty("IsActive")!;
+
+                if (activeInfo is null)
+                {
+                    result.Success = false;
+                    result.Message = "Esta entidad no se puede remover";
+                    return result;
+                }
+
+                PropertyInfo updateInfo = type.GetProperty("UpdatedAt")!;
+                activeInfo.SetValue(entity, false);
+                updateInfo.SetValue(entity, DateTime.UtcNow);
+
+                Entity.Update(entity);
                 await _appointmentDbContext.SaveChangesAsync();
                 result.Message = "Entidad removida correctamente";
             }

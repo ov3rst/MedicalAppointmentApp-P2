@@ -8,6 +8,6 @@ namespace MedicalAppointment.Application.Base
         Task<OperationResult> GetById(TType id);
         Task<OperationResult> Save(TDtoSave data);
         Task<OperationResult> Update(TDtoUpdate data);
-        Task<OperationResult> Remove(TDtoRemove data);
+        Task<OperationResult> Remove(TType id);
     }
 }

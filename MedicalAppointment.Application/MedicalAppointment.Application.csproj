@@ -7,15 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MedicalAppointment.Infraestructure\MedicalAppointment.Infraestructure.csproj" />
     <ProjectReference Include="..\MedicalAppointment.Persistence\MedicalAppointment.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\AppointmentsServices\" />
-    <Folder Include="Services\InsuranceServices\" />
-    <Folder Include="Services\MedicalServices\" />
-    <Folder Include="Services\UsersServices\" />
-    <Folder Include="Services\SystemServices\" />
   </ItemGroup>
 
 </Project>

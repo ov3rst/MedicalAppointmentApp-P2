@@ -16,7 +16,10 @@ namespace MedicalAppointment.Persistence.Validations.Insurance
                 if (!result.Success) return result;
             }
 
-            result = BaseValidations.ValidateString(entity.Name);
+            result = BaseValidations.ValidateString(entity.Name, 100);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateLength(entity.Website!, 255);
             if (!result.Success) return result;
 
             result = BaseValidations.ValidatePhone(entity.ContactNumber);

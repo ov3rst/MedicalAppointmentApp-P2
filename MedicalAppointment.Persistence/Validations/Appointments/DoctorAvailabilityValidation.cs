@@ -7,7 +7,7 @@ namespace MedicalAppointment.Persistence.Validations.Appointments
     {
         public static OperationResult ValidateAvailability(DoctorAvailability entity, bool validateID = false)
         {
-            OperationResult result = new OperationResult();
+            OperationResult result = new();
 
             if (entity is null)
             {
@@ -16,40 +16,23 @@ namespace MedicalAppointment.Persistence.Validations.Appointments
                 return result;
             }
 
-            if (validateID && entity.Id <= 0)
+            if (validateID)
             {
-                result.Success = false;
-                result.Message = "El id no puede ser menor o igual a 0";
-                return result;
+                result = BaseValidations.ValidateId(entity.Id, "DoctorAvailabilityId");
+                if (!result.Success) return result;
             }
 
-            if (entity!.DoctorID <= 0)
-            {
-                result.Success = false;
-                result.Message = "El doctor no debe ser nulo";
-                return result;
-            }
+            result = BaseValidations.ValidateId(entity.DoctorID, "DoctorAvailabilityId");
+            if (!result.Success) return result;
 
-            if (entity.AvailableDate < DateOnly.FromDateTime(DateTime.Now))
-            {
-                result.Success = false;
-                result.Message = "La fecha no puede ser anterior a la actual";
-                return result;
-            }
+            result = BaseValidations.ValidateDate(BaseValidations.ToDateTime(entity.AvailableDate));
+            if (!result.Success) return result;
 
-            if (entity.StartTime < TimeOnly.FromDateTime(DateTime.Now))
-            {
-                result.Success = false;
-                result.Message = "La hora no puede ser anterior ni igual a la hora actual";
-                return result;
-            }
+            result = BaseValidations.ValidateTime(entity.StartTime);
+            if (!result.Success) return result;
 
-            if (entity.EndTime <= TimeOnly.FromDateTime(DateTime.Now))
-            {
-                result.Success = false;
-                result.Message = "La hora no puede ser anterior ni igual a la hora actual";
-                return result;
-            }
+            result = BaseValidations.ValidateTime(entity.EndTime);
+            if (!result.Success) return result;
 
             return result;
         }

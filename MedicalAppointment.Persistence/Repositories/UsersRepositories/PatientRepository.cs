@@ -189,15 +189,15 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
             return result;
         }
 
-        public async override Task<OperationResult> RemoveEntityAsync(Patient entity)
+        public async override Task<OperationResult> RemoveEntityAsync(int id)
         {
-            OperationResult result = PatientValidations.ValidatePatient(entity);
+            OperationResult result = BaseValidations.ValidateId(id);
 
             if (result.Success)
             {
                 try
                 {
-                    result = await base.RemoveEntityAsync(entity);
+                    result = await base.RemoveEntityAsync(id);
                 }
                 catch (Exception ex)
                 {

@@ -1,19 +1,19 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.System;
-using MedicalAppointment.Persistence.Interfaces.SystemRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.System;
+using MedicalAppointment.Application.DTOs.SystemDTOs.Notification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.SystemControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NotificationController : BaseController<Notification, int>
+    public class NotificationController : BaseController<SaveNotificationDTO, UpdateNotificationDTO, RemoveNotificationDTO, int>
     {
-        private readonly INotificationRepository _repository;
+        private readonly INotificationService _service;
 
-        public NotificationController(INotificationRepository repository) : base(repository)
+        public NotificationController(INotificationService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
     }
 }

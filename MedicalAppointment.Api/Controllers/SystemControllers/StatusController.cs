@@ -1,19 +1,19 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.System;
-using MedicalAppointment.Persistence.Interfaces.SystemRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.System;
+using MedicalAppointment.Application.DTOs.SystemDTOs.Status;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.SystemControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StatusController : BaseController<Status, int>
+    public class StatusController : BaseController<SaveStatusDTO, UpdateStatusDTO, RemoveStatusDTO, int>
     {
-        private readonly IStatusRepository _repository;
+        private readonly IStatusService _service;
 
-        public StatusController(IStatusRepository repository) : base(repository)
+        public StatusController(IStatusService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
     }
 }

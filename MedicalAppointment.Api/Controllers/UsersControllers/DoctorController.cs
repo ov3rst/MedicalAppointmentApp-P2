@@ -1,25 +1,25 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
-using MedicalAppointment.Domain.Entities.Users;
-using MedicalAppointment.Persistence.Interfaces.UsersRepositories;
+using MedicalAppointment.Application.Contracts_Interfaces_.Users;
+using MedicalAppointment.Application.DTOs.UsersDTOs.Doctors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.UsersControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DoctorController : BaseController<Doctor, int>
+    public class DoctorController : BaseController<SaveDoctorDTO, UpdateDoctorDTO, RemoveDoctorDTO, int>
     {
-        private readonly IDoctorRepository _repository;
+        private readonly IDoctorService _service;
 
-        public DoctorController(IDoctorRepository repository) : base(repository)
+        public DoctorController(IDoctorService service) : base(service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet("specialtyId")]
         public async Task<IActionResult> GetDoctorBySpecialty([FromQuery] int specialtyId)
         {
-            var result = await _repository.GetDoctorBySpecialty(specialtyId);
+            var result = await _service.GetDoctorBySpecialty(specialtyId);
             return Ok(result);
         }
     }

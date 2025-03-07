@@ -2,6 +2,6 @@
 {
     public record UpdateAvailabilityModesDTO : BaseAvailabilityModesDTO
     {
-        public int AvailabilityId { get; set; }
+        public short AvailabilityId { get; set; }
     }
 }
