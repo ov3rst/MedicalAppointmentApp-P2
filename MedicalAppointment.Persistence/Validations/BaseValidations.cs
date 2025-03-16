@@ -17,9 +17,9 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
-        public static OperationResult ValidateString(string str, int length)
+        public static OperationResult ValidateString(string str, int length = 0, bool allowedToBeEmpty = false)
         {
-            if (string.IsNullOrEmpty(str)) return new OperationResult();
+            if (allowedToBeEmpty && string.IsNullOrEmpty(str)) return new OperationResult();
             OperationResult result = ValidateLength(str, length);
 
             if (result.Success && Regex.IsMatch(str, @"[\d]"))
@@ -109,7 +109,7 @@ namespace MedicalAppointment.Persistence.Validations
 
         public static DateTime ToDateTime(DateOnly dateOnly) => new DateTime(dateOnly.Year, dateOnly.Month, dateOnly.Day);
 
-        public static OperationResult ValidateLength(string str, int length)
+        private static OperationResult ValidateLength(string str, int length)
         {
             OperationResult result = new();
             if (str.Length > length)
@@ -121,14 +121,11 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
-        private static bool IsNullable(object prop, string propName)
+        private static bool IsNullable<T>(T prop, string propName)
         {
-            Type type = prop.GetType().;
+            Type type = prop!.GetType();
 
-            if (type.IsValueType)
-            {
-                //bool isNullable = Nullable.GetUnderlyingType(type.PropertyType) != null;
-            }
+            if (type.IsValueType) return Nullable.GetUnderlyingType(typeof(T)) is not null;
 
             return false;
         }

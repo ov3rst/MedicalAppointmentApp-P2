@@ -18,7 +18,7 @@ namespace MedicalAppointment.Persistence.Validations.Users
             result = BaseValidations.ValidateId(entity.SpecialtyID, "DoctorId");
             if (!result.Success) return result;
 
-            result = BaseValidations.ValidateId(entity.AvailabilityModeId, "PatientId");
+            result = BaseValidations.ValidateId((int)entity.AvailabilityModeId, "PatientId");
             if (!result.Success) return result;
 
             result = BaseValidations.ValidatePhone(entity.PhoneNumber);

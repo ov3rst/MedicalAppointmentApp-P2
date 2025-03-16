@@ -19,7 +19,31 @@ namespace MedicalAppointment.Persistence.Validations.Insurance
             result = BaseValidations.ValidateString(entity.Name, 100);
             if (!result.Success) return result;
 
-            result = BaseValidations.ValidateLength(entity.Website!, 255);
+            result = BaseValidations.ValidateString(entity.Website!, 255);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.City!, 100);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.State!, 100);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.Country!, 100);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.ZipCode!, 10);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.LogoUrl!, 255);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidatePhone(entity.CustomerSupportContact!);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.AcceptedRegions!, 255);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.Website!, 255);
             if (!result.Success) return result;
 
             result = BaseValidations.ValidatePhone(entity.ContactNumber);

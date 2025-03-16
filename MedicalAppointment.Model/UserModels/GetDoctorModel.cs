@@ -15,7 +15,7 @@
         public string? Bio { get; set; }
         public decimal? ConsultationFee { get; set; }
         public string? ClinicAddress { get; set; }
-        public short AvailabilityModeId { get; set; }
+        public short? AvailabilityModeId { get; set; }
         public string? AvailabilityModes { get; set; }
         public DateOnly LicenseExpirationDate { get; set; }
     }
