@@ -22,7 +22,7 @@ namespace MedicalAppointment.Persistence.Validations.Appointments
                 if (!result.Success) return result;
             }
 
-            result = BaseValidations.ValidateId(entity.DoctorID, "DoctorAvailabilityId");
+            result = BaseValidations.ValidateId(entity.DoctorID, "DoctorId");
             if (!result.Success) return result;
 
             result = BaseValidations.ValidateDate(BaseValidations.ToDateTime(entity.AvailableDate));

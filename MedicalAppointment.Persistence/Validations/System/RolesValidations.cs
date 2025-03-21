@@ -16,7 +16,7 @@ namespace MedicalAppointment.Persistence.Validations.System
                 if (!result.Success) return result;
             }
 
-            result = BaseValidations.ValidateString(entity.RoleName);
+            result = BaseValidations.ValidateString(entity.RoleName, length: 50);
             if (!result.Success) return result;
 
             return result;

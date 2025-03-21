@@ -114,6 +114,12 @@ namespace MedicalAppointment.Persistence.Base
             try
             {
                 var entity = await Entity.FindAsync(id);
+                if (entity is null)
+                {
+                    result.Success = false;
+                    result.Message = "Entidad no encontrada";
+                    return result;
+                }
 
                 Type type = entity!.GetType();
                 PropertyInfo activeInfo = type.GetProperty("IsActive")!;

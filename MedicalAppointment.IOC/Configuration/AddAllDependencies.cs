@@ -1,4 +1,5 @@
 ﻿using MedicalAppointment.Domain.SecurityInterfaces;
+using MedicalAppointment.Infraestructure;
 using MedicalAppointment.Infraestructure.Security;
 using MedicalAppointment.IOC.Repositories;
 using MedicalAppointment.IOC.Services;
@@ -28,6 +29,7 @@ namespace MedicalAppointment.IOC.Configuration
 
             services.AddSingleton<IJwtService, JwtService>();
             services.AddSingleton<IHashService, HashService>();
+            services.AddScoped(typeof(ILoggerService<>), typeof(LoggerService<>));
         }
     }
 }

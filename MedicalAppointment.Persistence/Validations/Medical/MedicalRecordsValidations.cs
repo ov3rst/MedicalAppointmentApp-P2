@@ -28,11 +28,8 @@ namespace MedicalAppointment.Persistence.Validations.Medical
             result = BaseValidations.ValidateString(entity.Treatment);
             if (!result.Success) return result;
 
-            if (entity.DateOfVisit <= DateTime.Now)
-            {
-                result.Success = false;
-                result.Message = "Fecha y hora invalidas para visitas";
-            }
+            result = BaseValidations.ValidateDate(entity.DateOfVisit);
+            if (!result.Success) return result;
 
             return result;
         }

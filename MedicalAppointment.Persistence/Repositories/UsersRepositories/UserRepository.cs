@@ -1,26 +1,25 @@
 ﻿using MedicalAppointment.Domain.Base;
 using MedicalAppointment.Domain.Entities.Users;
+using MedicalAppointment.Domain.SecurityInterfaces;
 using MedicalAppointment.Model.UserModels;
 using MedicalAppointment.Persistence.Base;
 using MedicalAppointment.Persistence.Context;
 using MedicalAppointment.Persistence.Interfaces.UsersRepositories;
-using MedicalAppointment.Persistence.Repositories.AppointmentsRepositories;
 using MedicalAppointment.Persistence.Validations;
 using MedicalAppointment.Persistence.Validations.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
 {
     public class UserRepository : BaseRepository<User, int>, IUserRepository
     {
         private readonly AppointmentDbContext _context;
-        private readonly ILogger<AppointmentsRepository> _logger;
+        private readonly ILoggerService<UserRepository> _logger;
         private readonly IConfiguration _configuration;
 
         public UserRepository(AppointmentDbContext context,
-                                               ILogger<AppointmentsRepository> logger,
+                                               ILoggerService<UserRepository> logger,
                                                IConfiguration configuration) : base(context)
         {
             _context = context;
@@ -47,12 +46,13 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                                      }).ToListAsync();
 
                 result.Message = "Usuarios encontrados";
+                _logger.LogInformation(result.Message);
             }
             catch (Exception ex)
             {
                 result.Success = false;
                 result.Message = this._configuration["ErrorUserRepository:GetAllAsync"];
-                _logger.LogError(result.Message, ex.ToString());
+                _logger.LogError(result.Message!, ex);
             }
 
             return result;
@@ -80,12 +80,13 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                 if (result.Data is null) throw new Exception();
 
                 result.Message = "Usuario encontrado";
+                _logger.LogInformation(result.Message!);
             }
             catch (Exception ex)
             {
                 result.Success = false;
                 result.Message = this._configuration["ErrorUserRepository:GetEntityByIdAsync"];
-                _logger.LogError(result.Message, ex.ToString());
+                _logger.LogError(result.Message!, ex);
             }
 
             return result;
@@ -100,12 +101,13 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                 try
                 {
                     result = await base.SaveEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorUserRepository:SaveEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
@@ -121,19 +123,19 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                 try
                 {
                     result = await base.UpdateEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorUserRepository:UpdateEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
             return result;
         }
 
-        // Este metodo hay que hacerle un arreglo, si se borra un usuario hay que ver si es doctor o paciente, y desactivar esos datos tambien
         public async override Task<OperationResult> RemoveEntityAsync(int id)
         {
             OperationResult result = BaseValidations.ValidateId(id);
@@ -143,12 +145,13 @@ namespace MedicalAppointment.Persistence.Repositories.UsersRepositories
                 try
                 {
                     result = await base.RemoveEntityAsync(id);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorUserRepository:RemoveEntityAsync "];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 

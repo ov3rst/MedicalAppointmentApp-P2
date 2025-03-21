@@ -17,10 +17,15 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
-        public static OperationResult ValidateString(string str, int length = 0, bool allowedToBeEmpty = false)
+        public static OperationResult ValidateString(string str, int length = int.MaxValue, bool allowedToBeEmpty = false)
         {
-            if (allowedToBeEmpty && string.IsNullOrEmpty(str)) return new OperationResult();
-            OperationResult result = ValidateLength(str, length);
+            OperationResult result = new();
+
+            if (!allowedToBeEmpty) result = ValidateEmptyString(str);
+
+            if (!result.Success || allowedToBeEmpty && string.IsNullOrEmpty(str)) return result;
+
+            result = ValidateLength(str, length);
 
             if (result.Success && Regex.IsMatch(str, @"[\d]"))
             {
@@ -31,9 +36,51 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
+        public static OperationResult ValidateOnlyLetterAndNumber(string str, int length = int.MaxValue, bool allowedToBeEmpty = false)
+        {
+            OperationResult result = ValidateLength(str, length);
+            if (!result.Success || allowedToBeEmpty && string.IsNullOrEmpty(str)) return result;
+
+            if (!Regex.IsMatch(str, @"^[a-zA-Z0-9 ]+$"))
+            {
+                result.Success = false;
+                result.Message = "La dirección es invalida";
+            }
+
+            return result;
+        }
+
+        public static OperationResult ValidateUrl(string str, bool allowedToBeEmpty = false)
+        {
+            OperationResult result = new();
+            if (allowedToBeEmpty && string.IsNullOrEmpty(str)) return result;
+
+            if (!Regex.IsMatch(str, @"^(https?:\/\/)?([\w\-]+(\.[\w\-]+)+)(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$"))
+            {
+                result.Success = false;
+                result.Message = "La URL es invalida";
+            }
+
+            return result;
+        }
+
+        private static OperationResult ValidateEmptyString(string str)
+        {
+            OperationResult result = new();
+
+            if (string.IsNullOrEmpty(str))
+            {
+                result.Success = false;
+                result.Message = "Esta propiedad no puede estar vacia";
+            }
+
+            return result;
+        }
+
         public static OperationResult ValidateEmail(string str)
         {
-            OperationResult result = new OperationResult();
+            OperationResult result = new();
+
             if (!Regex.IsMatch(str, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
             {
                 result.Success = false;
@@ -43,9 +90,11 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
-        public static OperationResult ValidateId(int id, string name = "id")
+        public static OperationResult ValidateId(int id, string name = "id", bool allowedToBeEmpty = false)
         {
             OperationResult result = new OperationResult();
+            if (allowedToBeEmpty) return result;
+
             if (id <= 0)
             {
                 result.Success = false;
@@ -59,7 +108,7 @@ namespace MedicalAppointment.Persistence.Validations
         {
             OperationResult result = new();
 
-            if (Regex.IsMatch(num.ToString(), @"[A-Za-zñÑàèìòùÀÈÌÒÙ]"))
+            if (!Regex.IsMatch(num.ToString(), @"[A-Za-zñÑàèìòùÀÈÌÒÙ]"))
             {
                 result.Success = false;
                 result.Message = "Esta propiedad no debe contener numeros";
@@ -68,14 +117,15 @@ namespace MedicalAppointment.Persistence.Validations
             return result;
         }
 
-        public static OperationResult ValidatePhone(string str)
+        public static OperationResult ValidatePhone(string str, bool allowedToBeEmpty = false)
         {
             OperationResult result = new();
+            if (allowedToBeEmpty && string.IsNullOrEmpty(str)) return result;
 
-            if (Regex.IsMatch(str, @"^(809|829|849)-\d{3}-\d{4}$"))
+            if (!Regex.IsMatch(str, @"^(809|829|849)-\d{3}-\d{4}$"))
             {
                 result.Success = false;
-                result.Message = "El numero de telefono es invalido";
+                result.Message = "El número de teléfono es invalido";
             }
 
             return result;
@@ -115,19 +165,26 @@ namespace MedicalAppointment.Persistence.Validations
             if (str.Length > length)
             {
                 result.Success = false;
-                result.Message = "El limite de caracteres es mayor al permitido";
+                result.Message = "El limite de carácteres es mayor al permitido";
             }
 
             return result;
         }
 
-        private static bool IsNullable<T>(T prop, string propName)
+        public static OperationResult ValidateDecimal(decimal? num, bool allowedToBeEmpty = false)
         {
-            Type type = prop!.GetType();
+            OperationResult result = new();
+            if (allowedToBeEmpty && num is 0 || num is null) return result;
 
-            if (type.IsValueType) return Nullable.GetUnderlyingType(typeof(T)) is not null;
+            if (Regex.IsMatch(num.ToString()!, @"^\d{8}(\.\d{1,2})?$"))
+            {
+                result.Success = false;
+                result.Message = "El numero de telefono es invalido";
+            }
 
-            return false;
+            return result;
         }
+
+        private static bool IsNullable<T>(T prop) => Nullable.GetUnderlyingType(typeof(T)) is not null;
     }
 }

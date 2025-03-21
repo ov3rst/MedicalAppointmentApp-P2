@@ -1,26 +1,25 @@
 ﻿using MedicalAppointment.Domain.Base;
 using MedicalAppointment.Domain.Entities.Insurance;
+using MedicalAppointment.Domain.SecurityInterfaces;
 using MedicalAppointment.Model.InsuranceModels;
 using MedicalAppointment.Persistence.Base;
 using MedicalAppointment.Persistence.Context;
 using MedicalAppointment.Persistence.Interfaces.InsuranceRepositories;
-using MedicalAppointment.Persistence.Repositories.AppointmentsRepositories;
 using MedicalAppointment.Persistence.Validations;
 using MedicalAppointment.Persistence.Validations.Insurance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
 {
     public class InsuranceProviderRepository : BaseRepository<InsuranceProvider, int>, IInsuranceProviderRepository
     {
         private readonly AppointmentDbContext _context;
-        private readonly ILogger<AppointmentsRepository> _logger;
+        private readonly ILoggerService<InsuranceProviderRepository> _logger;
         private readonly IConfiguration _configuration;
 
         public InsuranceProviderRepository(AppointmentDbContext context,
-                                                          ILogger<AppointmentsRepository> logger,
+                                                          ILoggerService<InsuranceProviderRepository> logger,
                                                           IConfiguration configuration) : base(context)
         {
             _context = context;
@@ -60,12 +59,13 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
                                          }).ToListAsync();
 
                     result.Message = "Las entidades han sido encontradas";
+                    _logger.LogInformation(result.Message);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = _configuration["ErrorInsuranceRepository:GetAllAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
 
                 }
             }
@@ -104,12 +104,13 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
                                          }).FirstOrDefaultAsync();
 
                     result.Message = "La entidad ha sido encontrada";
+                    _logger.LogInformation(result.Message);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = _configuration["ErrorInsuranceRepository:GetEntityByIdAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
 
                 }
             }
@@ -126,12 +127,13 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
                 try
                 {
                     result = await base.SaveEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorInsuranceRepository:SaveEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
@@ -147,12 +149,13 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
                 try
                 {
                     result = await base.UpdateEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorInsuranceRepository:UpdateEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
@@ -168,12 +171,13 @@ namespace MedicalAppointment.Persistence.Repositories.InsuranceRepositories
                 try
                 {
                     result = await base.RemoveEntityAsync(id);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorInsuranceRepository:RemoveEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 

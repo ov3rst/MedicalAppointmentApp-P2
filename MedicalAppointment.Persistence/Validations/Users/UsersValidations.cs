@@ -16,6 +16,18 @@ namespace MedicalAppointment.Persistence.Validations.Users
                 if (!result.Success) return result;
             }
 
+            result = BaseValidations.ValidateString(entity.FirstName, length: 100);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.LastName, length: 100);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateEmail(entity.Email);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateId((int)entity.RoleID!, allowedToBeEmpty: true);
+            if (!result.Success) return result;
+
             return result;
         }
     }

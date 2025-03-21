@@ -1,25 +1,24 @@
 ﻿using MedicalAppointment.Domain.Base;
 using MedicalAppointment.Domain.Entities.System;
+using MedicalAppointment.Domain.SecurityInterfaces;
 using MedicalAppointment.Model.SystemModels;
 using MedicalAppointment.Persistence.Base;
 using MedicalAppointment.Persistence.Context;
 using MedicalAppointment.Persistence.Interfaces.SystemRepositories;
-using MedicalAppointment.Persistence.Repositories.AppointmentsRepositories;
 using MedicalAppointment.Persistence.Validations.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace MedicalAppointment.Persistence.Repositories.SystemRepositories
 {
     public class RolesRepository : BaseRepository<Roles, int>, IRolesRepository
     {
         private readonly AppointmentDbContext _context;
-        private readonly ILogger<AppointmentsRepository> _logger;
+        private readonly ILoggerService<RolesRepository> _logger;
         private readonly IConfiguration _configuration;
 
         public RolesRepository(AppointmentDbContext context,
-                                                          ILogger<AppointmentsRepository> logger,
+                                                          ILoggerService<RolesRepository> logger,
                                                           IConfiguration configuration) : base(context)
         {
             _context = context;
@@ -42,12 +41,13 @@ namespace MedicalAppointment.Persistence.Repositories.SystemRepositories
                                          }).ToListAsync();
 
                     result.Message = "Las entidades han sido encontradas";
+                    _logger.LogInformation(result.Message);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = _configuration["ErrorInsuranceRepository:GetAllAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
 
                 }
             }
@@ -63,12 +63,13 @@ namespace MedicalAppointment.Persistence.Repositories.SystemRepositories
                 try
                 {
                     result = await base.SaveEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorRolesRepository:SaveEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
@@ -84,12 +85,13 @@ namespace MedicalAppointment.Persistence.Repositories.SystemRepositories
                 try
                 {
                     result = await base.UpdateEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorRolesRepository:UpdateEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 

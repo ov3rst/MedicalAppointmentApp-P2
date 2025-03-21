@@ -1,15 +1,14 @@
 ﻿using MedicalAppointment.Domain.Base;
 using MedicalAppointment.Domain.Entities.Medical;
+using MedicalAppointment.Domain.SecurityInterfaces;
 using MedicalAppointment.Model.MedicalModels;
 using MedicalAppointment.Persistence.Base;
 using MedicalAppointment.Persistence.Context;
 using MedicalAppointment.Persistence.Interfaces.MedicalRepositories;
-using MedicalAppointment.Persistence.Repositories.AppointmentsRepositories;
 using MedicalAppointment.Persistence.Validations;
 using MedicalAppointment.Persistence.Validations.Medical;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
 {
@@ -17,11 +16,11 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
     {
 
         private readonly AppointmentDbContext _context;
-        private readonly ILogger<AppointmentsRepository> _logger;
+        private readonly ILoggerService<SpecialtiesRepository> _logger;
         private readonly IConfiguration _configuration;
 
         public SpecialtiesRepository(AppointmentDbContext context,
-                                                          ILogger<AppointmentsRepository> logger,
+                                                          ILoggerService<SpecialtiesRepository> logger,
                                                           IConfiguration configuration) : base(context)
         {
             _context = context;
@@ -45,12 +44,13 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
 
 
                     result.Message = "Las entidades han sido encontradas";
+                    _logger.LogInformation(result.Message);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = _configuration["ErrorSpecialtiesRepository:GetAllAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
 
                 }
             }
@@ -66,12 +66,13 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
                 try
                 {
                     result = await base.SaveEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorSpecialtiesRepository:SaveEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
@@ -87,12 +88,13 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
                 try
                 {
                     result = await base.UpdateEntityAsync(entity);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorSpecialtiesRepository:UpdateEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 
@@ -108,12 +110,13 @@ namespace MedicalAppointment.Persistence.Repositories.MedicalRepositories
                 try
                 {
                     result = await base.RemoveEntityAsync(id);
+                    _logger.LogInformation(result.Message!);
                 }
                 catch (Exception ex)
                 {
                     result.Success = false;
                     result.Message = this._configuration["ErrorSpecialtiesRepository:RemoveEntityAsync"];
-                    _logger.LogError(result.Message, ex.ToString());
+                    _logger.LogError(result.Message!, ex);
                 }
             }
 

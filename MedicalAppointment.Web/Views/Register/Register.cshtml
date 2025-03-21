@@ -1,0 +1,36 @@
+﻿@model PatientUserModel
+
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                <h2>Registrarse</h2>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Register" asp-action="Register" method="post">
+                    <input class="form-control mb-3" type="text" required placeholder="Nombres" asp-for="FirstName"/>
+                    <input class="form-control mb-3" type="text" required placeholder="Apellidos" asp-for="LastName" />
+                    <input class="form-control mb-3" type="email" required placeholder="Correo Electrónico" asp-for="Email" />
+                    <input class="form-control mb-3" type="date" required placeholder="Fecha de nacimiento" asp-for="DateOfBirth" />
+                    <input class="form-control mb-3" type="text" required placeholder="Apellidos" asp-for="LastName" />
+                    <select class="form-control mb-3" asp-for="Gender" required>
+                        <option value="0">Masculino</option>
+                        <option value="1">Femenino</option>
+                    </select>
+                    <input class="form-control mb-3" type="tel" pattern="(809|829|849)-[\d]{3}-[\d]{4}" required placeholder="Teléfono" asp-for="PhoneNumber" />
+                    <input class="form-control mb-3" type="text" required placeholder="Dirección" asp-for="LastName" />
+                    <input class="form-control mb-3" type="text" placeholder="Nombre de contacto emergencia" asp-for="EmergencyContactName" />
+                    <input class="form-control mb-3" type="tel" pattern="(809|829|849)-[\d]{3}-[\d]{4}" placeholder="Teléfono contacto emergencia" asp-for="EmergencyContactPhone" />
+                    <input class="form-control mb-3" type="text" required placeholder="Tipo de sangre" maxlength="4" asp-for="BloodType" />
+                    <input class="form-control mb-3" type="text" required placeholder="Alergias" asp-for="Allergies" />
+
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-primary" type="submit">Registrarse</button>
+                    </div>
+                    <p>¿Ya tienes una cuenta? <a asp-controller="Login" asp-action="Login">Iniciar sesión</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

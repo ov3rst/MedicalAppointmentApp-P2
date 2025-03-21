@@ -12,11 +12,17 @@ namespace MedicalAppointment.Persistence.Validations.Users
 
             if (validateID)
             {
-                result = BaseValidations.ValidateId(entity.Id, "InsuranceId");
+                result = BaseValidations.ValidateId(entity.Id, "PatientId");
                 if (!result.Success) return result;
             }
 
-            result = BaseValidations.ValidateString(entity.EmergencyContactName);
+            result = BaseValidations.ValidateDate(BaseValidations.ToDateTime(entity.DateOfBirth));
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.Address, length: 255);
+            if (!result.Success) return result;
+
+            result = BaseValidations.ValidateString(entity.EmergencyContactName, length: 100);
             if (!result.Success) return result;
 
             result = BaseValidations.ValidateString(entity.Allergies);
@@ -25,20 +31,13 @@ namespace MedicalAppointment.Persistence.Validations.Users
             result = BaseValidations.ValidatePhone(entity.PhoneNumber);
             if (!result.Success) return result;
 
+            result = BaseValidations.ValidatePhone(entity.EmergencyContactPhone);
+            if (!result.Success) return result;
+
             result = BaseValidations.ValidateId(entity.InsuranceProviderId, "InsuranceProviderId");
             if (!result.Success) return result;
 
             return result;
         }
-
-        /*public DateOnly DateOfBirth { get; set; }
-        public char Gender { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-        public string EmergencyContactName { get; set; }
-        public string EmergencyContactPhone { get; set; }
-        public string BloodType { get; set; }
-        public string Allergies { get; set; }
-        public int InsuranceProviderId { get; set; }*/
     }
 }
