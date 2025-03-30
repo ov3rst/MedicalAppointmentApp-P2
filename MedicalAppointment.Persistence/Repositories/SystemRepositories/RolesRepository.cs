@@ -33,12 +33,49 @@ namespace MedicalAppointment.Persistence.Repositories.SystemRepositories
             {
                 try
                 {
+                    result.Data = await _context.Roles.Select(r =>
+                        new GetRoleModel
+                        {
+                            RoleId = r.Id,
+                            RoleName = r.RoleName
+                        }
+                    ).ToListAsync();
+
                     result.Data = await (from role in _context.Roles
                                          select new GetRoleModel
                                          {
                                              RoleId = role.Id,
                                              RoleName = role.RoleName
                                          }).ToListAsync();
+
+                    result.Message = "Las entidades han sido encontradas";
+                    _logger.LogInformation(result.Message);
+                }
+                catch (Exception ex)
+                {
+                    result.Success = false;
+                    result.Message = _configuration["ErrorInsuranceRepository:GetAllAsync"];
+                    _logger.LogError(result.Message!, ex);
+
+                }
+            }
+            return result;
+        }
+
+        public override async Task<OperationResult> GetEntityByIdAsync(int id)
+        {
+            OperationResult result = new OperationResult();
+            if (result.Success)
+            {
+                try
+                {
+                    result.Data = await (from role in _context.Roles
+                                         where role.Id == id
+                                         select new GetRoleModel
+                                         {
+                                             RoleId = role.Id,
+                                             RoleName = role.RoleName
+                                         }).FirstOrDefaultAsync();
 
                     result.Message = "Las entidades han sido encontradas";
                     _logger.LogInformation(result.Message);

@@ -37,7 +37,7 @@ namespace MedicalAppointment.Api.Controllers.Base
             return Ok(result);
         }
 
-        [HttpPut("UpdateEntity")]
+        [HttpPost("UpdateEntity")]
         public virtual async Task<IActionResult> UpdateAsync(TDtoUpdate entity)
         {
             var result = await _service.Update(entity);

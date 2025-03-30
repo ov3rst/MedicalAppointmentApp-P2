@@ -95,6 +95,11 @@ namespace MedicalAppointment.Persistence.Base
             try
             {
                 this.Entity.Update(entity);
+                var entry = _appointmentDbContext.Entry(entity);
+                if (entry.Metadata.FindProperty("CreatedAt") != null)
+                {
+                    entry.Property("CreatedAt").IsModified = false;
+                }
                 await _appointmentDbContext.SaveChangesAsync();
                 result.Message = "Entidad actualizada correctamente";
             }

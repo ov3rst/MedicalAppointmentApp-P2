@@ -1,5 +1,6 @@
 ﻿using MedicalAppointment.Application.Contracts_Interfaces_;
 using MedicalAppointment.Domain.Base;
+using System.Net.Http.Json;
 
 namespace MedicalAppointment.Infraestructure
 {
@@ -12,31 +13,69 @@ namespace MedicalAppointment.Infraestructure
             _client = clientFactory.CreateClient("AppClient");
         }
 
-        public async Task<OperationResult> GetAsync(string route)
+        public async Task<OperationResult> GetResourseAsync(string route)
         {
-            OperationResult result = new();
+            OperationResult? result = new();
 
             var response = await _client.GetAsync(route);
 
             if (response.IsSuccessStatusCode)
+                result = await response.Content.ReadFromJsonAsync<OperationResult>();
+            else
             {
-                //result = await response.Content.ReadFromJsonAsync();
+                result.Success = false;
+                result.Message = "Ocurrio un error al obtener los datos";
             }
+
+            return result!;
         }
 
-        public Task<OperationResult> PostAsync(string route)
+        public async Task<OperationResult> PostResourseAsync(string route, object data)
         {
-            throw new NotImplementedException();
+            OperationResult? result = new();
+
+            var response = await _client.PostAsJsonAsync(route, data);
+            if (response.IsSuccessStatusCode)
+                result = await response.Content.ReadFromJsonAsync<OperationResult>();
+            else
+            {
+                result.Success = false;
+                result.Message = "Ocurrio un error al guardar los datos";
+            }
+
+            return result!;
         }
 
-        public Task<OperationResult> PutAsync(string route)
+        public async Task<OperationResult> PutResourseAsync(string route, object data)
         {
-            throw new NotImplementedException();
+            OperationResult? result = new();
+
+            var response = await _client.PutAsJsonAsync(route, data);
+            if (response.IsSuccessStatusCode)
+                result = await response.Content.ReadFromJsonAsync<OperationResult>();
+            else
+            {
+                result.Success = false;
+                result.Message = "Ocurrio un error al editar los datos";
+            }
+
+            return result!;
         }
 
-        public Task<OperationResult> DeleteAsync(string route)
+        public async Task<OperationResult> DeleteResourseAsync(string route, int data)
         {
-            throw new NotImplementedException();
+            OperationResult? result = new();
+
+            var response = await _client.DeleteAsync($"{route}/{data}");
+            if (response.IsSuccessStatusCode)
+                result = await response.Content.ReadFromJsonAsync<OperationResult>();
+            else
+            {
+                result.Success = false;
+                result.Message = "Ocurrio un error al guardar los datos";
+            }
+
+            return result!;
         }
     }
 }

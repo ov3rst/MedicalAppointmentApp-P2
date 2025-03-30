@@ -4,9 +4,9 @@ namespace MedicalAppointment.Application.Contracts_Interfaces_
 {
     public interface IAppHttpClient
     {
-        Task<OperationResult> GetAsync(string route);
-        Task<OperationResult> PostAsync(string route);
-        Task<OperationResult> PutAsync(string route);
-        Task<OperationResult> DeleteAsync(string route);
+        Task<OperationResult> GetResourseAsync(string route);
+        Task<OperationResult> PostResourseAsync(string route, object data);
+        Task<OperationResult> PutResourseAsync(string route, object data);
+        Task<OperationResult> DeleteResourseAsync(string route, int data);
     }
 }

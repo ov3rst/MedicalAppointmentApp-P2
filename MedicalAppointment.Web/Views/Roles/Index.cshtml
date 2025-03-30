@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.RoleModel>
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h1>Gestion de roles</h1>
+
+<p>
+    <a asp-action="Create">Agregar rol nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.roleId) *@
+                Identificador
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.roleName) *@
+                Rol
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.roleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roleName)
+            </td>
+            <td>
+                    @Html.ActionLink("Actualizar", "Edit", new { id = item.roleId }) |
+                @Html.ActionLink("Ver detalles", "Details", new { id= item.roleId}) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.roleId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
