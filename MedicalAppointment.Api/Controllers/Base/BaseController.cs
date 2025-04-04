@@ -45,8 +45,8 @@ namespace MedicalAppointment.Api.Controllers.Base
             return Ok(result);
         }
 
-        [HttpDelete("RemoveEntity")]
-        public async Task<IActionResult> RemoveAsync(TType id)
+        [HttpPost("RemoveEntity")]
+        public async Task<IActionResult> RemoveAsync([FromBody] TType id)
         {
             var result = await _service.Remove(id);
             if (result is null || !result.Success) return BadRequest(result);

@@ -33,15 +33,8 @@ namespace MedicalAppointment.Persistence.Repositories.SystemRepositories
             {
                 try
                 {
-                    result.Data = await _context.Roles.Select(r =>
-                        new GetRoleModel
-                        {
-                            RoleId = r.Id,
-                            RoleName = r.RoleName
-                        }
-                    ).ToListAsync();
-
                     result.Data = await (from role in _context.Roles
+                                         where role.IsActive
                                          select new GetRoleModel
                                          {
                                              RoleId = role.Id,

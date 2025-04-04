@@ -1,0 +1,36 @@
+﻿@model MedicalAppointment.Web.Models.InsuranceModels.NetworkTypeModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Tipo de red</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Identificador
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NetworkTypeId)
+        </dd>
+        <dt class = "col-sm-2">
+            Nombre
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Descripción
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@Model.NetworkTypeId">Actualizar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver atras</a>
+</div>

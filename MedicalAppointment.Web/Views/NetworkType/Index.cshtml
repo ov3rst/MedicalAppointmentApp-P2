@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.InsuranceModels.NetworkTypeModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.NetworkTypeId) *@
+                Identificador
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Name) *@
+                Nombre
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Description) *@
+                Descrición
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetworkTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.NetworkTypeId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.NetworkTypeId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.NetworkTypeId">
+                        Eliminar
+                    </button>
+
+                    @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.NetworkTypeId},
+                {"Entity", "Tipo de red"}
+                })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

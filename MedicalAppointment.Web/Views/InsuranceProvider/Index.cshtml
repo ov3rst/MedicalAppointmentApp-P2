@@ -1,0 +1,155 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.InsuranceModels.InsuranceProviderModel>
+
+@{
+    ViewData["Title"] = "Proveedores de seguros";
+}
+
+<h1>Proveedores de seguro</h1>
+
+<p>
+    <a asp-action="Create">Agregar nuevo proveedor</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.InsuranceProviderId) *@
+                Identificador
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Name) *@
+                Nombre
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.ContactNumber) *@
+                Numero de contacto
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Email) *@
+                Correo electronico
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Website) *@
+                Pagina web
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Address) *@
+                Dirección
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.City) *@
+                Ciudad
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.State) *@
+                Provincia
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Country) *@
+                Pais
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.ZipCode) *@
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.CoverageDetails) *@
+                Detalles de cobertura
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.LogoUrl) *@
+                Logotipo
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.IsPreferred) *@
+                Preferido?
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.NetworkTypeId) *@
+                Tipo de red
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.CustomerSupportContact) *@
+                Telefono de soporte al usuario
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.AcceptedRegions) *@
+                Regiones aceptadas
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.MaxCoverageAmount) *@
+                Monto maximo de cobertura
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsuranceProviderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Website)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoverageDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogoUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPreferred)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetworkTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerSupportContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcceptedRegions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxCoverageAmount)
+            </td>
+            <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.InsuranceProviderId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.InsuranceProviderId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.InsuranceProviderId">
+                        Eliminar
+                    </button>
+
+                @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.InsuranceProviderId},
+                {"Entity", "Proveedor de seguros"}
+                })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

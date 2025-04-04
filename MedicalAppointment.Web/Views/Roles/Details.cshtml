@@ -1,4 +1,4 @@
-﻿@model MedicalAppointment.Web.Models.RoleModel
+﻿@model MedicalAppointment.Web.Models.SystemModels.RoleModel
 
 @{
     ViewData["Title"] = "Detalles";
@@ -27,6 +27,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.roleId }) |
+    <a asp-action="Index">Volver atras</a>
 </div>

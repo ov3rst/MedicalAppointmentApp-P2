@@ -1,0 +1,48 @@
+﻿@model MedicalAppointment.Web.Models.AppointmentsModels.DoctorAvailabilityModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles de disponibilidad</h1>
+
+<div>
+    <h4>Disponibilidad</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Identificador
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorAvailabilityId)
+        </dd>
+        <dt class = "col-sm-2">
+            Doctor Id
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorID)
+        </dd>
+        <dt class="col-sm-2">
+            Fecha disponible
+        </dt>
+        <dd class="col-sm-10">
+            @Model.AvailableDate.ToShortDateString();
+        </dd>
+        <dt class="col-sm-2">
+            Desde
+        </dt>
+        <dd class="col-sm-10">
+            @Model.StartTime.ToShortTimeString();
+        </dd>
+        <dt class="col-sm-2">
+            Desde
+        </dt>
+        <dd class="col-sm-10">
+            @Model.EndTime.ToShortTimeString();
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-controller="DoctorAvailability" asp-route-id="@Model.DoctorAvailabilityId" class="btn btn-primary">Editar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver atras</a>
+</div>

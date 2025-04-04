@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.AppointmentsModels.DoctorAvailabilityModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorAvailabilityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorAvailabilityId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorID)
+            </td>
+            <td>
+                @item.AvailableDate.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @item.StartTime.ToString("HH:mm")
+            </td>
+            <td>
+                @item.StartTime.ToString("HH:mm")
+            </td>
+            <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.DoctorAvailabilityId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.DoctorAvailabilityId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.DoctorAvailabilityId">
+                        Eliminar
+                    </button>
+                    @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.DoctorAvailabilityId},
+                {"Entity", "Disponibilidad"}
+                })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

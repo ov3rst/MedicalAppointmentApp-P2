@@ -1,0 +1,32 @@
+﻿@model MedicalAppointment.Web.Models.MedicalModels.AvailabilityModesModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles de la disponibilidad</h1>
+
+<div>
+    <h4>Modo de disponibilidad</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.AvailabilityModesId) *@
+            Identificador
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AvailabilityModesId)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.AvailabilityMode) *@
+            Disponibilidad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AvailabilityMode)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@Model.AvailabilityModesId">Actualizar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver atras</a>
+</div>

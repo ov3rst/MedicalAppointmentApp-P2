@@ -1,4 +1,4 @@
-﻿namespace MedicalAppointment.Web.Models
+﻿namespace MedicalAppointment.Web.Models.SystemModels
 {
     public class RoleModel
     {

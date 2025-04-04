@@ -1,0 +1,53 @@
+﻿@model MedicalAppointment.Web.Models.AppointmentsModels.AppointmentsModel
+
+@{
+    ViewData["Title"] = "Detalles de la cita";
+}
+
+<h1>View</h1>
+
+<div>
+    <h4>AppointmentsModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.AppointmentId) *@
+            Identificador
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AppointmentId)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.PatientID) *@
+            Paciente Id
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientID)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.DoctorID) *@
+            Doctor Id
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorID)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.AppointmentDate) *@
+            Fecha de la cita
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AppointmentDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.StatusID) *@
+            Estatus
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StatusID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-controller="Appointment" asp-route-id="@Model.AppointmentId" class="btn btn-primary">Editar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver atras</a>
+</div>

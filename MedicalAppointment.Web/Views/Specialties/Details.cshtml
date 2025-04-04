@@ -1,0 +1,32 @@
+﻿@model MedicalAppointment.Web.Models.MedicalModels.SpecialtiesModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Especialidad</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.SpecialtyId) *@
+            Identificador
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.specialtyId)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.SpecialtyName) *@
+            Especialidad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.specialtyName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@Model.specialtyId">Actualizar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</div>

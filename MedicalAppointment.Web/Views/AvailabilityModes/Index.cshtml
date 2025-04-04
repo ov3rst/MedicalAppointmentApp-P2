@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.MedicalModels.AvailabilityModesModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Mo</h1>
+
+<p>
+    <a asp-action="Create">Agregar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.AvailabilityModesId) *@
+                Identificador
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.AvailabilityMode) *@
+                Disponibilidad
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailabilityModesId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailabilityMode)
+            </td>
+            <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.AvailabilityModesId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.AvailabilityModesId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.AvailabilityModesId">
+                        Eliminar
+                    </button>
+
+                    @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.AvailabilityModesId},
+                {"Entity", "Modo de disponibilidad"}
+                })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

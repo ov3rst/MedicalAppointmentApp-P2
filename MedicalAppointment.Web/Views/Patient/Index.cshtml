@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.UsersModels.PatientModel>
+
+@{
+    ViewData["Title"] = "Agregar nuevo paciente";
+}
+
+<h1>Pacientes</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar nuevo paciente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.PatientId) *@
+                Paciente Id
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Gender) *@
+                Genero
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.PhoneNumber) *@
+                Telefono
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Address) *@
+                Dirección
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.EmergencyContactName) *@
+                Nombre contacto de emergencia
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.EmergencyContactPhone) *@
+                Telefono contacto de emergencia
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.BloodType) *@
+                Tipo de sangre
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Allergies) *@
+                Alergias
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.InsuranceProviderId) *@
+                Proveedor de seguro Id
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmergencyContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmergencyContactPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Allergies)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsuranceProviderId)
+                </td>
+                <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.PatientId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.PatientId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.PatientId">
+                        Eliminar
+                    </button>
+
+                    @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.PatientId},
+                {"Entity", "Paciente"}
+                })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

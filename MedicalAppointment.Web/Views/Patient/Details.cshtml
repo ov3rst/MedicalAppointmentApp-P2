@@ -1,0 +1,81 @@
+﻿@model MedicalAppointment.Web.Models.UsersModels.PatientModel
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Paciente</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.PatientId) *@
+            Paciente Id
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientId)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.Gender) *@
+            Genero
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.PhoneNumber) *@
+            Telefono
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.Address) *@
+            Dirección
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.EmergencyContactName) *@
+            Nombre contacto de emergencia
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmergencyContactName)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.EmergencyContactPhone) *@
+            Telefono ontacto de emergencia
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmergencyContactPhone)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.BloodType) *@
+            Tipo de sangre
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BloodType)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.Allergies) *@
+            Alergias
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Allergies)
+        </dd>
+        <dt class = "col-sm-2">
+            @* @Html.DisplayNameFor(model => model.InsuranceProviderId) *@
+            Proveedor de seguros Id
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InsuranceProviderId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@Model.PatientId">Actualizar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver atras</a>
+</div>

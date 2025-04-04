@@ -1,0 +1,108 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.UsersModels.DoctorModel>
+
+@{
+    ViewData["Title"] = "Agregar doctor";
+}
+
+<h1>Agregar Doctor</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar nuevo doctor</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.DoctorId) *@
+                Identificador
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.SpecialtyID) *@
+                Especialidad Id
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.LicenseNumber) *@
+                Licencia
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.PhoneNumber) *@
+                Telefono
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.YearsOfExperience) *@
+                Años de experiencia
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Education) *@
+                Educación
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Bio) *@
+                Bio
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.ConsultationFee) *@
+                Tarifa por consulta
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.ClinicAddress) *@
+                Direccion de la clinica
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.AvailabilityModeId) *@
+                Disponibilidad Id
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialtyID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicenseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearsOfExperience)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Education)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConsultationFee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClinicAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvailabilityModeId)
+                </td>
+                <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.DoctorId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.DoctorId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.DoctorId">
+                        Eliminar
+                    </button>
+
+                    @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.DoctorId},
+                {"Entity", "Doctor"}
+                })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

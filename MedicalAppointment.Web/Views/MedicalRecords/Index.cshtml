@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MedicalAppointment.Web.Models.MedicalModels.MedicalRecordsModel>
+
+@{
+    ViewData["Title"] = "Records medicos";
+}
+
+<h1>Records Medicos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar nuevo record</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.MedicalRecordsId) *@
+                Identificador
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.PatientID) *@
+                Paciente Id
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.DoctorID) *@
+                Doctor Id
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Diagnosis) *@
+                Diagnostico
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Treatment) *@
+                Tratamiento
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.DateOfVisit) *@
+                Fecha proxima cita
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalRecordsId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diagnosis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Treatment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfVisit)
+                </td>
+                <td>
+                    <a class="btn btn-warning text-white" asp-action="Edit" asp-route-id="@item.MedicalRecordsId">Actualizar</a> |
+                    <a class="btn btn-primary text-white" asp-action="Details" asp-route-id="@item.MedicalRecordsId">Ver detalles</a> |
+                    <button id="showModal" type="button" class="btn btn-danger deleteBtn" data-bs-toggle="modal" data-bs-target="#DeleteModal-@item.MedicalRecordsId">
+                        Eliminar
+                    </button>
+
+                    @await Html.PartialAsync("_deleteModalPartialView", new ViewDataDictionary(ViewData)
+                {
+                {"Id", item.MedicalRecordsId},
+                {"Entity", "Record Medico"}
+                })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

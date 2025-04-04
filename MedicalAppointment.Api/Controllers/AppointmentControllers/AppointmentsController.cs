@@ -1,13 +1,11 @@
 ﻿using MedicalAppointment.Api.Controllers.Base;
 using MedicalAppointment.Application.Contracts_Interfaces_.Appointments;
 using MedicalAppointment.Application.DTOs.AppointmentsDTOs.Appointments;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalAppointment.Api.Controllers.AppointmentControllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class AppointmentsController : BaseController<SaveAppointmentDTO, UpdateAppointmentDTO, RemoveAppointmentDTO, int>
     {
